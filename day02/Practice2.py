@@ -16,8 +16,8 @@ print(target_Iris)
 
 # [단계 3] 특성 데이터 추출
 # 각 품종의 꽃잎 길이(PetalLengthCm)와 꽃잎 너비(PetalWidthCm)를 추출하세요.
-petal_length = target_Iris['PetalLengthCm']
-petal_width = target_Iris['PetalWidthCm']
+petal_length = target_Iris['PetalLengthCm'].values
+petal_width = target_Iris['PetalWidthCm'].values
 
 
 # [단계 4] 학습 데이터 구성
