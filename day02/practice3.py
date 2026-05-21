@@ -54,14 +54,18 @@ knr.fit(train_input,train_target)
 print(knr.score(train_input,train_target))#0.575461861044996
 print(knr.score(test_input,test_target))#0.60355587808418
 
-
-
 # [단계 8] 이웃 개수 변경에 따른 회귀선 시각화
 # 이웃의 개수(n_neighbors)가 1, 3, 5, 10으로 변화할 때, 꽃받침 길이 4.0부터 6.0까지의 구간에 대한 모델의 예측 회귀선을 각각 시각화하세요.
-
-
-
+x = np.arange(4.0,6.0).reshape(-1,1)
+print(x)
+for i in [1,3,4,10,15] : 
+    knr.n_neighbors = i 
+    knr.fit(train_input,train_target)
+    print(knr.score(test_input,test_target))
+    pred = knr.predict(x)
+    print(pred)
 
 # [단계 9] 단계8 에서 가장 적합한 이웃의 개수( 1, 3, 5, 10 중에)를 주석에 작성 하시오. 
-
 # PythonML Practice3: K-최근접 이웃 회귀와 과소적합 해결
+
+# 10

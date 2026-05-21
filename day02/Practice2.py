@@ -51,6 +51,7 @@ kn.fit(train_input,train_target)
 # 모델의 정확도(score)를 출력하세요.
 print(kn.score(test_input,test_target))
 
+
 # [단계 9] 새로운 데이터 예측
 # [꽃잎 길이 2.0, 꽃잎 너비 0.5] 데이터를
 # 어떤 품종으로 예측하는지 확인하세요.
