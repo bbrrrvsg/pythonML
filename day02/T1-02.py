@@ -86,4 +86,5 @@ dist , indexs = kn.kneighbors( new )
 plt.scatter(train_scalerd[:,0],train_scalerd[:,1])  # 스케일링된 학습용 
 plt.scatter(new[:,0],new[:,1])
 plt.scatter(train_input[indexs,0],train_scalerd[indexs,1]) # 예측에 사용된 이웃 자료 
-plt.show() 
+plt.show()
+

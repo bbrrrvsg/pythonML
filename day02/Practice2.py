@@ -36,40 +36,73 @@ print(Iris_target)
 # train_test_split() 함수를 사용하여
 # 학습용 데이터와 테스트용 데이터를 분리하세요.
 # test_size 옵션을 설정하세요.
+from sklearn.model_selection import train_test_split
+train_input , test_input , train_target , test_target = train_test_split(Iris_data,Iris_target,test_size=0.3)
 
 # [단계 7] KNeighborsClassifier 모델 생성 및 학습
 # KNeighborsClassifier 객체를 생성하고
 # 훈련용 데이터로 모델을 학습하세요.
+from sklearn.neighbors import KNeighborsClassifier
+kn = KNeighborsClassifier()
+kn.fit(train_input,train_target)
 
 # [단계 8] 모델 평가
 # 테스트용 데이터를 사용하여
 # 모델의 정확도(score)를 출력하세요.
+print(kn.score(test_input,test_target))
 
 # [단계 9] 새로운 데이터 예측
 # [꽃잎 길이 2.0, 꽃잎 너비 0.5] 데이터를
 # 어떤 품종으로 예측하는지 확인하세요.
+print(kn.predict([[2.0,0.5]]))
 
 # [단계 10] 데이터 시각화
 # 산점도(Scatter plot)를 사용하여
 # 훈련용 데이터와 예측 데이터를 시각화하세요.
+import matplotlib.pyplot as plt
+plt.scatter(train_input[:,0],train_input[:,1])
+plt.scatter(2.0,0.5)
+plt.show()
 
 # [단계 11] 최근접 이웃 확인
 # kneighbors() 함수를 사용하여
 # 예측에 사용된 최근접 이웃 데이터를 확인하고 시각화하세요.
+dist,indexs = kn.kneighbors([[2.0,0.5]])
+print("이웃들과의 거리:", dist)
+print("이웃들의 인덱스:", indexs)
+plt.scatter(train_input[:,0],train_input[:,1])          # 학습용
+plt.scatter(2.0,0.5) # 예측값    
+plt.scatter(train_input[indexs,0],train_input[indexs,1]) # 예측에 사용된 이웃들 시각화 
+plt.show()
 
 # [단계 12] 스케일링(StandardScaler) 적용
 # StandardScaler 객체를 생성하세요.
 # 훈련용 데이터를 기준으로 fit() 하세요.
 # transform()을 사용하여 훈련용 데이터를 스케일링하세요.
+from sklearn.preprocessing import StandardScaler
+ss = StandardScaler()
+ss.fit(train_input)
+train_scalerd = ss.transform(train_input)
+test_scalerd = ss.transform(test_input)
+plt.scatter(train_scalerd[:,0],train_scalerd[:,1]) 
+plt.show()
 
 # [단계 13] 스케일링 이후 재학습
 # 스케일링된 훈련용 데이터로
 # 모델을 다시 학습하세요.
+kn.fit(train_scalerd,train_target)
 
 # [단계 14] 새로운 데이터 스케일링 후 예측
 # [2.0, 0.5] 데이터도 동일하게 스케일링하여
 # 품종을 다시 예측하세요.
+new = ss.transform([[2.0,0.5]])
+print(kn.predict(new))
 
 # [단계 15] 스케일링 이후 최근접 이웃 시각화
 # 스케일링된 데이터 기준으로
 # 최근접 이웃들을 다시 시각화하세요.
+
+plt.scatter(train_scalerd[:,0],train_scalerd[:,1])
+plt.scatter(new[:,0],new[:,1])
+plt.scatter(train_scalerd[indexs,0],train_scalerd[indexs,1]) # 예측에 사용된 이웃 자료 
+plt.show()
