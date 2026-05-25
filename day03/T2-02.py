@@ -19,6 +19,8 @@
 # [1] 숭어의 '길이' , '무게' : '길이'(특성) 에 따른 '무게'(타깃) 예측
 import pandas as pd 
 df = pd.read_csv( './day03/Fish.csv')
+df.info()
+
 fish_data = df[ df['Species'].isin(['Perch']) ]
 perch_length = fish_data['Length2'].values
 perch_weight = fish_data['Weight'].values
@@ -92,7 +94,7 @@ lr.fit( train_poly , train_target ) # 다항으로 학습
 # 예측할 자료 , 길이 : 50 인 무게 예측 
 print( lr.predict([[ 50**2 , 50 ]]))    # [1579.0440311]
 # 여러개 예측 
-point = np.arange( 0 , 50 )    # 15 부터 50까지( 예측하고 싶은 범위 ) 1씩 증가 하는 리스트 반환 
+point = np.arange( 15 , 50 )    # 15 부터 50까지( 예측하고 싶은 범위 ) 1씩 증가 하는 리스트 반환 
 point_poly = np.column_stack( ( point**2 , point ) ) # 15~50 제곱한 열 , 15~50 열 
 print( point_poly )
 # 시각화 
